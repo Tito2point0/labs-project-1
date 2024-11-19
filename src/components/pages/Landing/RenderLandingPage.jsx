@@ -4,6 +4,9 @@ import React from 'react';
 // import GrantRatesByNationalityImg from '../../../styles/Images/pie-chart-no-text.png';
 // import GrantRatesOverTimeImg from '../../../styles/Images/line-graph-no-text.png';
 import HrfPhoto from '../../../styles/Images/paper-stack.jpg';
+import GrantRatesByOfficeImg from '../../../styles/Images/bar-graph-no-text.png';
+import GrantRatesByNationalityImg from '../../../styles/Images/pie-chart-no-text.png';
+import GrantRatesOverTimeImg from '../../../styles/Images/line-graph-no-text.png';
 import '../../../styles/RenderLandingPage.less';
 import { Button } from 'antd';
 import { useHistory } from 'react-router-dom';
@@ -30,7 +33,24 @@ function RenderLandingPage(props) {
           </h3>
         </div>
       </div>
+      <div className='imageSection'>
+        <div className="imageSectionFirstImage">
+          <img src= {GrantRatesByOfficeImg} alt="Grant Rates By Office" />
+          
+          <h3>Search Grant Rate By Office</h3>
 
+        </div>
+        <div className="imageSection2">
+          <img src={GrantRatesByNationalityImg} alt="Grant Rates By Nationality" />
+        <h3>Grant Rates By Nationality</h3>
+        </div>
+
+        <div className="imageSection3">
+          <img src={GrantRatesOverTimeImg} alt="Grant Rates Over Time" />
+          <h3>Grant Rates Over Time</h3>
+        </div>
+        
+ </div>
       {/* Graphs Section: Add code here for the graphs section for your first ticket */}
       {/* <div className="graphs-section"> */}
       <div className="view-more-data-btn-container">
@@ -41,6 +61,7 @@ function RenderLandingPage(props) {
         >
           View the Data
         </Button>
+        
       </div>
 
       <div className="middle-section">

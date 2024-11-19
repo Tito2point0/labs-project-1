@@ -1,0 +1,12 @@
+{
+	"Div with className": {
+	  "prefix": "divt",
+	  "body": [
+		"<div className=\"$1\">",
+		"  $2",
+		"</div>"
+	  ],
+	  "description": "Create a div with a className"
+	}
+  }
+  

@@ -44,7 +44,36 @@
 // .graphs-section {
 //  ADD THIS BACK IN WHEN YOU HAVE THE GRAPHS SECTION
 // }
-
+.imageSection {
+    display: flex;               // Arrange the images horizontally
+    justify-content: space-evenly; // Space them out evenly
+    align-items: center;         // Vertically align items in the row
+    margin: 20px 0;              // Add spacing around the section
+  
+    .imageSectionFirstImage,
+    .imageSection2,
+    .imageSection3 {
+      display: flex;             // Align the image and text vertically
+      flex-direction: column;    // Stack the image above the text
+      align-items: center;       // Center align image and text
+      width: 200px;              // Optional: Set a consistent width for the images
+      margin: 0 15px;            // Add horizontal spacing between items
+  
+      img {
+        max-width: 100%;         // Make sure images fit within their containers
+        height: auto;            // Maintain aspect ratio
+        border-radius: 5px;      // Optional: Add rounded corners
+      }
+  
+      h3 {
+        margin-top: 10px;        // Space between image and text
+        font-size: 1rem;         // Adjust text size
+        color: @secondary-color; // Use your predefined secondary color
+        text-align: center;      // Center the text
+      }
+    }
+  }
+  
 .view-more-data-btn-container {
     height: 44px;
     width: 180px;
