@@ -38,6 +38,8 @@ function GraphsContainer() {
     //   `/graphs/${value}/${view === 'office-heat-map' ? 'time-series' : view}`
     // );
 
+
+    
     switch (value) {
       case 'All Offices':
         history.push(

@@ -33,7 +33,9 @@ function RenderLandingPage(props) {
           </h3>
         </div>
       </div>
-      <div className='imageSection'>
+      {/* Graphs Section: Add code here for the graphs section for your first ticket */}
+      {/* <div className="graphs-section"> */}
+      <div className='graphs-section'>
         <div className="imageSectionFirstImage">
           <img src= {GrantRatesByOfficeImg} alt="Grant Rates By Office" />
           
@@ -51,8 +53,7 @@ function RenderLandingPage(props) {
         </div>
         
  </div>
-      {/* Graphs Section: Add code here for the graphs section for your first ticket */}
-      {/* <div className="graphs-section"> */}
+      
       <div className="view-more-data-btn-container">
         <Button
           type="default"
