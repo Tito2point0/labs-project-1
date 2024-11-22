@@ -16,6 +16,9 @@ import ScrollToTopOnMount from '../../../utils/scrollToTopOnMount';
 
 const { background_color } = colors;
 
+const url1 = 'https://hrf-asylum-be-b.herokuapp.com/cases/fiscalSummary';
+const url2 = 'https://hrf-asylum-be-b.herokuapp.com/cases/citizenshipSummary';
+
 function GraphWrapper(props) {
   const { set_view, dispatch } = props;
   let { office, view } = useParams();
@@ -73,36 +76,134 @@ function GraphWrapper(props) {
     
     */
 
+    console.log('hello world');
+
     if (office === 'all' || !office) {
-      axios
-        .get(process.env.REACT_APP_API_URI, {
-          // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
-          params: {
-            from: years[0],
-            to: years[1],
-          },
+      const fiscalSummaryRequest = axios.get(url1, {
+        // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
+        params: {
+          from: years[0],
+          to: years[1],
+        },
+      });
+      const citizenshipSummaryRequest = axios.get(url2, {
+        // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
+        params: {
+          from: years[0],
+          to: years[1],
+          
+        },
+      });
+      Promise.all([fiscalSummaryRequest, citizenshipSummaryRequest])
+        .then(responses => {
+          const [fiscalData, citizenshipData] = responses.map(
+            response => response.data
+          );
+          const realData = [
+            {
+              granted: fiscalData.granted,
+              adminClosed: fiscalData.adminClosed,
+              denied: fiscalData.denied,
+              closedNacaraGrant: fiscalData.closedNacaraGrant,
+              asylumTerminated: fiscalData.asylumTerminated,
+              totalCases: fiscalData.totalCases,
+              yearResults: fiscalData.yearResults.map(year => ({
+                fiscal_year: year.fiscal_year,
+                granted: year.granted,
+                adminClosed: year.adminClosed,
+                denied: year.denied,
+                closedNacaraGrant: year.closedNacaraGrant,
+                asylumTerminated: year.asylumTerminated,
+                totalCases: year.totalCases,
+                yearData: year.yearData.map(office => ({
+                  office: office.office,
+                  granted: office.granted,
+                  adminClosed: office.adminClosed,
+                  denied: office.denied,
+                  closedNacaraGrant: office.closedNacaraGrant,
+                  asylumTerminated: office.asylumTerminated,
+                  totalCases: office.totalCases,
+                })),
+              })),
+              citizenshipResults: citizenshipData.map(country => ({
+                citizenship: country.citizenship,
+                granted: country.granted,
+                adminClosed: country.adminClosed,
+                denied: country.denied,
+                closedNacaraGrant: country.closedNacaraGrant,
+                asylumTerminated: country.asylumTerminated,
+                totalCases: country.totalCases,
+              })),
+            },
+          ];
+          console.log(realData);
+          stateSettingCallback(view, office, realData);
         })
-        .then(result => {
-          stateSettingCallback(view, office, test_data); // <-- `test_data` here can be simply replaced by `result.data` in prod!
-        })
-        .catch(err => {
-          console.error(err);
+        .catch(error => {
+          console.error(error);
         });
     } else {
-      axios
-        .get(process.env.REACT_APP_API_URI, {
-          // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
-          params: {
-            from: years[0],
-            to: years[1],
-            office: office,
-          },
+      const fiscalSummaryRequest = axios.get(url1, {
+        // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
+        params: {
+          from: years[0],
+          to: years[1],
+        },
+      });
+      const citizenshipSummaryRequest = axios.get(url2, {
+        // mock URL, can be simply replaced by `${Real_Production_URL}/summary` in prod!
+        params: {
+          from: years[0],
+          to: years[1],
+          office: office,
+        },
+      });
+      Promise.all([fiscalSummaryRequest, citizenshipSummaryRequest])
+        .then(responses => {
+          const [fiscalData, citizenshipData] = responses.map(
+            response => response.data
+          );
+          const realData = [
+            {
+              granted: fiscalData.granted,
+              adminClosed: fiscalData.adminClosed,
+              denied: fiscalData.denied,
+              closedNacaraGrant: fiscalData.closedNacaraGrant,
+              asylumTerminated: fiscalData.asylumTerminated,
+              totalCases: fiscalData.totalCases,
+              yearResults: fiscalData.yearResults.map(year => ({
+                fiscal_year: year.fiscal_year,
+                granted: year.granted,
+                adminClosed: year.adminClosed,
+                denied: year.denied,
+                closedNacaraGrant: year.closedNacaraGrant,
+                asylumTerminated: year.asylumTerminated,
+                totalCases: year.totalCases,
+                yearData: year.yearData.map(office => ({
+                  office: office.office,
+                  granted: office.granted,
+                  adminClosed: office.adminClosed,
+                  denied: office.denied,
+                  closedNacaraGrant: office.closedNacaraGrant,
+                  asylumTerminated: office.asylumTerminated,
+                  totalCases: office.totalCases,
+                })),
+              })),
+              citizenshipResults: citizenshipData.map(country => ({
+                citizenship: country.citizenship,
+                granted: country.granted,
+                adminClosed: country.adminClosed,
+                denied: country.denied,
+                closedNacaraGrant: country.closedNacaraGrant,
+                asylumTerminated: country.asylumTerminated,
+                totalCases: country.totalCases,
+              })),
+            },
+          ];
+          stateSettingCallback(view, office, realData);
         })
-        .then(result => {
-          stateSettingCallback(view, office, test_data); // <-- `test_data` here can be simply replaced by `result.data` in prod!
-        })
-        .catch(err => {
-          console.error(err);
+        .catch(error => {
+          console.error(error);
         });
     }
   }

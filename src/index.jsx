@@ -1,11 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-  BrowserRouter as Router,
-  Route,
-  // useHistory,
-  Switch,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import 'antd/dist/antd.less';
 import { NotFoundPage } from './components/pages/NotFound';
@@ -14,31 +9,38 @@ import { LandingPage } from './components/pages/Landing';
 import { FooterContent, SubFooter } from './components/Layout/Footer';
 import { HeaderContent } from './components/Layout/Header';
 
-// import { TablePage } from './components/pages/Table';
-
 import { Layout } from 'antd';
 import GraphsContainer from './components/pages/DataVisualizations/GraphsContainer';
 import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import reducer from './state/reducers';
 import { colors } from './styles/data_vis_colors';
+import Auth0ProviderWithHistory from './auth/auth0-provider-with-history'; // Updated import
+import SignupButton from './components/signup-button';
+import LoginButton from './components/login-button';
+import LogoutButton from './components/logout-button';
+import './styles/styles.css'; // Import the CSS file
+import Profile from './components/pages/Profile'; // Add this import
 
 const { primary_accent_color } = colors;
 
 const store = configureStore({ reducer: reducer });
 ReactDOM.render(
-  <Router>
-    <Provider store={store}>
-      <React.StrictMode>
-        <App />
-      </React.StrictMode>
-    </Provider>
-  </Router>,
+  <Provider store={store}>
+    <React.StrictMode>
+      <Router>
+        <Auth0ProviderWithHistory>
+          <App />
+        </Auth0ProviderWithHistory>
+      </Router>
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 
 export function App() {
   const { Footer, Header } = Layout;
+
   return (
     <Layout>
       <Header
@@ -50,10 +52,16 @@ export function App() {
         }}
       >
         <HeaderContent />
+        <div className="center-buttons">
+          <SignupButton />
+          <LoginButton />
+          <LogoutButton />
+        </div>
       </Header>
       <Switch>
         <Route path="/" exact component={LandingPage} />
         <Route path="/graphs" component={GraphsContainer} />
+        <Route path="/profile" component={Profile} /> {/* Add this route */}
         <Route component={NotFoundPage} />
       </Switch>
       <Footer
