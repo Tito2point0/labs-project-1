@@ -111,8 +111,14 @@ p {
   font-size: 16px;
   cursor: pointer;
   border-radius: 5px; /* Adjust the border radius as needed */
+  transition: background-color 0.3s ease; /* Add a transition for smooth hover effect */
 }
 
 .button:hover {
   background-color: var(--primary-color-tawny-birch); /* Example hover color */
+}
+
+.button:focus {
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 0 3px var(--primary-color-tawny-birch); /* Add a custom focus outline */
 }
