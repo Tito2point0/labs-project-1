@@ -137,45 +137,34 @@ function RenderLandingPage(props) {
       </div>
       <div>
         <div className="bottom-section">
-          <h2>Systemic Disparity Insights</h2>
+          <h2 className="disparity-heading">Systemic Disparity Insights</h2>
           <div className="insights">
-            <div>
-              <h2>36%</h2>
-              <p className="insights-text">
+            <div className="insight">
+              <h2 className="percentage">36%</h2>
+              <p className="description">
                 By the end of the Trump administration, the average asylum
                 office grant rate had fallen 36 percent from an average of 44
                 percent in fiscal year 2016 to 28 percent in fiscal year 2020.
               </p>
             </div>
-            <div>
-              <h2>5%</h2>
-              <p className="insights-text">
+            <div className="insight">
+              <h2 className="percentage">5%</h2>
+              <p className="description">
                 The New York asylum office grant rate dropped to 5 percent in
                 fiscal year 2020.
               </p>
             </div>
-            <div>
-              <h2>6x Lower</h2>
-              <p className="insights-text">
+            <div className="insight">
+              <h2 className="percentage">6x Lower</h2>
+              <p className="description">
                 Between fiscal year 2017 and 2020, the New York asylum office's
                 average grant rate was six times lower than the San Francisco
                 asylum office.
               </p>
             </div>
           </div>
-          <div className="read-more-btn-container">
-            <Button
-              type="default"
-              style={style} // Use the defined style variable
-              onClick={() =>
-                (window.location.href =
-                  'https://humanrightsfirst.org/about-us/')
-              }
-            >
-              Read More
-            </Button>
-          </div>
         </div>
+
         <p onClick={() => scrollToTop()} className="back-to-top">
           Back To Top ^
         </p>
