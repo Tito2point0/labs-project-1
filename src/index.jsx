@@ -15,12 +15,13 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import reducer from './state/reducers';
 import { colors } from './styles/data_vis_colors';
-import Auth0ProviderWithHistory from './auth/auth0-provider-with-history'; // Updated import
+import Auth0ProviderWithHistory from './auth/auth0-provider-with-history';
 import SignupButton from './components/signup-button';
 import LoginButton from './components/login-button';
 import LogoutButton from './components/logout-button';
-import './styles/styles.css'; // Import the CSS file
-import Profile from './components/pages/Profile'; // Add this import
+import './styles/styles.css';
+import Profile from './components/pages/Profile';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const { primary_accent_color } = colors;
 
@@ -40,6 +41,7 @@ ReactDOM.render(
 
 export function App() {
   const { Footer, Header } = Layout;
+  const { isAuthenticated } = useAuth0();
 
   return (
     <Layout>
@@ -53,15 +55,26 @@ export function App() {
       >
         <HeaderContent />
         <div className="center-buttons">
-          <SignupButton />
-          <LoginButton />
-          <LogoutButton />
+          {!isAuthenticated && <SignupButton />}
+          {isAuthenticated ? (
+            <>
+              <button
+                className="button"
+                onClick={() => window.location.assign('/profile')}
+              >
+                Profile
+              </button>
+              <LogoutButton />
+            </>
+          ) : (
+            <LoginButton />
+          )}
         </div>
       </Header>
       <Switch>
         <Route path="/" exact component={LandingPage} />
         <Route path="/graphs" component={GraphsContainer} />
-        <Route path="/profile" component={Profile} /> {/* Add this route */}
+        <Route path="/profile" component={Profile} />
         <Route component={NotFoundPage} />
       </Switch>
       <Footer

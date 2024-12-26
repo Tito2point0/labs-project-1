@@ -9,19 +9,21 @@ const Profile = () => {
   }
 
   return (
-    isAuthenticated && (
-      <div>
-        <img src={user.picture} alt={user.name} />
-        <h2>{user.name}</h2>
-        <p>{user.email}</p>
-        <button
-          className="button"
-          onClick={() => logout({ returnTo: window.location.origin })}
-        >
-          Log Out
-        </button>
-      </div>
-    )
+    <div>
+      {isAuthenticated && (
+        <div>
+          <img src={user.picture} alt={user.name} />
+          <h2>{user.name}</h2>
+          <p>{user.email}</p>
+          <button
+            className="button"
+            onClick={() => logout({ returnTo: window.location.origin })}
+          >
+            Log Out
+          </button>
+        </div>
+      )}
+    </div>
   );
 };
 

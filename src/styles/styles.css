@@ -104,7 +104,7 @@ p {
 }
 
 .button {
-  background-color: var(--primary-color-coral); /* Example color */
+  background-color: var(--secondary-color-dark-slate-gray); /* Example color */
   color: var(--primary-color-white); /* Example color */
   border: none;
   padding: 10px 20px;
@@ -112,6 +112,7 @@ p {
   cursor: pointer;
   border-radius: 5px; /* Adjust the border radius as needed */
   transition: background-color 0.3s ease; /* Add a transition for smooth hover effect */
+  white-space: nowrap; /* Ensure text is displayed inline */
 }
 
 .button:hover {
